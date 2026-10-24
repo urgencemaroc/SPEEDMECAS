@@ -1,0 +1,351 @@
+/* SPEEDMECA Motorsport & Precision Design System */
+:root {
+  --primary-red: #E5252A;
+  --primary-red-hover: #ff3339;
+  --primary-red-glow: rgba(229, 37, 42, 0.45);
+  --primary-red-subtle: rgba(229, 37, 42, 0.12);
+  --accent-orange: #FF6B00;
+  
+  --bg-deep: #08090C;
+  --bg-surface: #0E1015;
+  --bg-card: rgba(18, 20, 28, 0.75);
+  --bg-card-hover: rgba(26, 30, 42, 0.9);
+  --bg-glass: rgba(14, 16, 22, 0.85);
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(229, 37, 42, 0.35);
+  --border-active: #E5252A;
+  
+  --text-main: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --text-dim: #6B7280;
+  --text-red: #FF4D52;
+  
+  --font-racing: 'Orbitron', monospace, sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-arabic: 'Cairo', 'Tajawal', sans-serif;
+  
+  --shadow-red: 0 0 25px rgba(229, 37, 42, 0.4);
+  --shadow-red-lg: 0 0 45px rgba(229, 37, 42, 0.6);
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: var(--font-body);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(229, 37, 42, 0.09) 0%, transparent 60%),
+    radial-gradient(circle at 100% 40%, rgba(229, 37, 42, 0.04) 0%, transparent 50%),
+    linear-gradient(to bottom, #08090C 0%, #0B0D12 50%, #08090C 100%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Arabic typography support */
+.lang-ar, [dir="rtl"] {
+  font-family: var(--font-arabic);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: #252833;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-red);
+}
+
+/* Carbon fiber patterned container */
+.carbon-pattern {
+  background-color: #111318;
+  background-image: 
+    radial-gradient(black 15%, transparent 16%),
+    radial-gradient(black 15%, transparent 16%);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+}
+
+/* Pulsing Red Emergency Beacon */
+@keyframes beaconPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(229, 37, 42, 0.8), inset 0 0 10px rgba(229, 37, 42, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(229, 37, 42, 0), inset 0 0 18px rgba(229, 37, 42, 0.8);
+    transform: scale(1.04);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 37, 42, 0), inset 0 0 10px rgba(229, 37, 42, 0.5);
+    transform: scale(1);
+  }
+}
+
+@keyframes sirenFlash {
+  0%, 100% { opacity: 1; filter: brightness(1.2); }
+  50% { opacity: 0.65; filter: brightness(0.8); }
+}
+
+@keyframes radarSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.glass-panel-glow {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.6), 0 0 20px rgba(229, 37, 42, 0.15);
+}
+
+/* Buttons */
+.btn-primary-red {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background: linear-gradient(135deg, #FF2B30 0%, #C4161B 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 18px rgba(229, 37, 42, 0.45);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary-red:hover {
+  background: linear-gradient(135deg, #FF4549 0%, #D81A20 100%);
+  box-shadow: 0 6px 26px rgba(229, 37, 42, 0.7);
+  transform: translateY(-2px);
+}
+
+.btn-sos-glow {
+  animation: beaconPulse 2s infinite ease-in-out;
+}
+
+.btn-outline-red {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background: rgba(229, 37, 42, 0.08);
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-glow);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.btn-outline-red:hover {
+  background: rgba(229, 37, 42, 0.22);
+  border-color: var(--primary-red);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(229, 37, 42, 0.3);
+}
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.btn-dark:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Badge */
+.racing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(229, 37, 42, 0.15);
+  color: #FF5A5F;
+  border: 1px solid rgba(229, 37, 42, 0.4);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Section styling */
+.section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 0.6rem;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.section-title span {
+  color: var(--primary-red);
+  text-shadow: 0 0 20px rgba(229, 37, 42, 0.5);
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 720px;
+  margin: 0.8rem auto 0;
+  line-height: 1.6;
+}
+
+/* Grid Layouts */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.75rem;
+}
+
+@media (max-width: 640px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Modal Backdrop */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 8, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Utility classes */
+.text-red {
+  color: var(--primary-red);
+}
+
+.font-racing {
+  font-family: var(--font-racing);
+}
+
+.font-arabic {
+  font-family: var(--font-arabic);
+}
+
+/* Print Styles for Official Devis */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #speedmeca-official-devis, #speedmeca-official-devis * {
+    visibility: visible;
+  }
+  #speedmeca-official-devis {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    box-shadow: none !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border-radius: 0 !important;
+  }
+  html, body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .modal-overlay {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+    inset: auto !important;
+  }
+}
+
